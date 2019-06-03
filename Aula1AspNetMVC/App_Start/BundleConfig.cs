@@ -26,6 +26,10 @@ namespace Aula1AspNetMVC
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+
+            // Coloque false para debug
+            // bundles não serão gerados
+            BundleTable.EnableOptimizations = true;
         }
     }
 }

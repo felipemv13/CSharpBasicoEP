@@ -15,7 +15,7 @@ namespace Aula1AspNetMVC.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "Your application description 2 page.";
 
             return View();
         }
@@ -25,6 +25,11 @@ namespace Aula1AspNetMVC.Controllers
             ViewBag.Message = "Your contact page.";
 
             return View();
+        }
+
+        public ActionResult Teste()
+        {
+            return View("Index");
         }
     }
 }

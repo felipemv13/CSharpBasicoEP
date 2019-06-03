@@ -1,0 +1,100 @@
+﻿@model IEnumerable<Aula1AspNetMVC.Models.Cliente>
+
+@{
+    ViewBag.Title = "Teste";
+    //codigos adicionais
+    // <%: %>     <= expressao antiga
+}
+
+@* Documenta seu codigo *@
+<h2>Teste</h2>
+
+<!-- assim nao vai funcionar-->
+@*<div>@ViewBag.Ola</div>*@
+
+<!-- tem que ser feito como abaixo - HTML Helpers*-->
+<div>@Html.Raw(ViewBag.Ola)</div>
+
+@{
+    foreach (var cliente in Model)
+    {
+        <div>
+            @Html.Hidden("Id", cliente.Id)
+        </div>
+
+        <div>
+            @Html.TextBox("txtNome", cliente.Nome)
+            @Html.TextBoxFor(model => cliente.Nome)
+            @Html.EditorFor(model => cliente.Nome)
+        </div>
+
+        <div>
+            @Html.TextArea("txtNome2", new { rows = 5 })
+        </div>
+
+        <div>
+            @Html.ActionLink("Clique aqui", "Edit", new { cliente.Id })
+        </div>
+
+        <div>@Html.LabelFor(model => cliente.Nome)</div>
+        <div>@Html.DisplayFor(model => cliente.Nome)</div>
+
+        <div>
+            @Html.RadioButton("corFavorita", "Azul", true) Azul
+            @Html.RadioButton("corFavorita", "Amarelo", true) Amarelo
+            @Html.RadioButton("corFavorita", "Vermelho", true) Vermelho
+        </div>
+
+        <div>
+            @Html.ListBox("ListaCores", new SelectList(
+                new List<string>()
+                {
+                    "Azul", "Amarelo", "Preto", "Branco"
+                }))
+        </div>
+
+        <div>
+            @Html.DropDownList("drpListCores", new SelectList(
+           new List<string>()
+           {
+            "Azul", "Amarelo", "Preto", "Branco"
+           }))
+        </div>
+
+        <div>
+            @Html.DropDownListFor(c => cliente.Nome, new SelectList(Model, "id", "Nome"))
+        </div>
+
+        <div>
+            @Html.DropDownList("Id", string.Empty) @* aqui eu uso Id porque é o nome da minha ViewBag.Id*@
+        </div>
+
+        <div>
+            @Html.CheckBox("Certificado", false) Desejo receber Certificado
+        </div>
+
+        @*<div>
+                @Html.CheckBoxFor(c => cliente.Id) Desejo receber Certificado2
+            </div>*@
+
+        // trabalhando com PartialViews
+        <div>
+            @Html.Partial("_Saudacao");
+        </div>
+
+        <div>
+            @{
+                Html.RenderPartial("_Saudacao");
+                // conteudo de renderpartial nao dá pra ser armazenado em variável
+                // conteudo de partial dá
+            }
+        </div>
+        
+        // links
+
+        <div>
+            <a href="@Url.Action("Index","Home")"> Clique aqui</a>
+        </div>
+
+    }
+}
